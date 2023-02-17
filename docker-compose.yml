@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  exhibition.api:
+    image: ${DOCKER_REGISTRY-}exhibitionapi
+    build:
+      context: .
+      dockerfile: System/Api/exhibition.Api/Dockerfile

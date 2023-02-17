@@ -1,0 +1,25 @@
+version: '3.4'
+
+services:
+  exhibition_postgresql:
+    environment:
+      - POSTGRES_NAME=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=Passw0rd
+    ports:
+      - "5432:5432"
+
+    volumes:      
+      - ~/.docker-conf/postgresql/data/:/var/lib/postgresql/data
+
+
+
+
+  exhibition_api:
+    ports:
+      - "10000:80"
+    env_file:
+      - env.api
+      
+
+
