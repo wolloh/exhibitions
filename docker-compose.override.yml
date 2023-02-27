@@ -1,25 +1,13 @@
 version: '3.4'
 
 services:
-  exhibition_postgresql:
+  exhibition.api:
     environment:
-      - POSTGRES_NAME=postgres
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=Passw0rd
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=https://+:443;http://+:80
     ports:
-      - "5432:5432"
-
-    volumes:      
-      - ~/.docker-conf/postgresql/data/:/var/lib/postgresql/data
-
-
-
-
-  exhibition_api:
-    ports:
-      - "10000:80"
-    env_file:
-      - env.api
-      
-
-
+      - "80"
+      - "443"
+    volumes:
+      - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
+      - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro

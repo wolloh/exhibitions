@@ -1,0 +1,14 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\exhibitions.Context.Entities\exhibitions.Context.Entities.csproj" />
+    <ProjectReference Include="..\..\exhibitions.Context\exhibitions.Context.csproj" />
+  </ItemGroup>
+
+</Project>
