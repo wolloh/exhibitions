@@ -1,5 +1,7 @@
 using exhibition.Api;
 using exhibition.Api.Configuration;
+using exhibitions.Context;
+using exhibitions.Context.Setup;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,6 +12,7 @@ builder.Services.AddHttpContextAccessor();
 builder.Services.AddAppCors();
 builder.Services.AddAppController();
 builder.Services.RegisterAppServices();
+builder.Services.AddAppDbContext();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -18,6 +21,8 @@ app.UseHttpsRedirection();
 
 app.UseAuthorization();
 app.UseAppCors();
+DbInitializer.Execute(app.Services);
+DbSeeder.Execute(app.Services, true, true);
 app.MapControllers();
 
 app.Run();

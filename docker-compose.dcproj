@@ -3,7 +3,7 @@
   <PropertyGroup Label="Globals">
     <ProjectVersion>2.1</ProjectVersion>
     <DockerTargetOS>Linux</DockerTargetOS>
-    <ProjectGuid>e00c7618-1e82-4e37-a98e-52a585b64bd8</ProjectGuid>
+    <ProjectGuid>bb612a6f-4ead-4308-b9bc-8f29315669b8</ProjectGuid>
     <DockerLaunchAction>LaunchBrowser</DockerLaunchAction>
     <DockerServiceUrl>{Scheme}://localhost:{ServicePort}</DockerServiceUrl>
     <DockerServiceName>exhibition.api</DockerServiceName>
