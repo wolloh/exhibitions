@@ -1,4 +1,6 @@
-﻿using Microsoft.Extensions.Options;
+﻿using Api.Configuration;
+using exhibition.Common.Extensions;
+using Microsoft.Extensions.Options;
 
 namespace exhibition.Api.Configuration
 {
@@ -9,6 +11,8 @@ namespace exhibition.Api.Configuration
 
             services
             .AddControllers()
+            .AddNewtonsoftJson(options => options.SerializerSettings.SetDefaultSettings())
+                .AddValidator()
                 ;
 
             return services;

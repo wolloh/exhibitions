@@ -1,5 +1,5 @@
 ﻿using exhibition.Common.Exceptions;
-using exhibition.Common.Response;
+using exhibition.Common.Responses;
 
 using FluentValidation.Results;
 

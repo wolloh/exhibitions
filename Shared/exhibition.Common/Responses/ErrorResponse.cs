@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace exhibition.Common.Response
+namespace exhibition.Common.Responses
 {
     public class ErrorResponse
     {
