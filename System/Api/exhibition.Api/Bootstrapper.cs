@@ -1,4 +1,5 @@
-﻿using exhibition.Services.Settings;
+﻿using exhibition.Services.exhibitions;
+using exhibition.Services.Settings;
 
 namespace exhibition.Api
 {
@@ -8,7 +9,9 @@ namespace exhibition.Api
         {
             services
                 .AddMainSettings()
-
+                .AddExhibitionsService()
+                .AddIdentitySettings()
+                .AddSwaggerSettings()
                 ;
 
             return services;

@@ -1,6 +1,9 @@
-﻿using exhibition.Services.Settings;
+﻿using exhibition.Common.Security;
+using exhibition.Services.Settings;
+using exhibiton.Services.Settings;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.OpenApi.Models;
+using Swashbuckle.AspNetCore.Filters;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using Swashbuckle.AspNetCore.SwaggerUI;
 using System.Reflection;
@@ -17,7 +20,7 @@ namespace exhibition.Api.Configuration
         /// <param name="services">Services collection</param>
         /// <param name="mainSettings"></param>
         /// <param name="swaggerSettings"></param>
-        public static IServiceCollection AddAppSwagger(this IServiceCollection services, SwaggerSettings swaggerSettings)
+        public static IServiceCollection AddAppSwagger(this IServiceCollection services, IdentitySettings identitySettings,SwaggerSettings swaggerSettings)
         {
             if (!swaggerSettings.Enabled)
                 return services;
@@ -46,52 +49,53 @@ namespace exhibition.Api.Configuration
 
                 options.DescribeAllParametersInCamelCase();
 
-                var xmlFile = "api.xml";
-                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
-                options.IncludeXmlComments(xmlPath);
+                //var xmlFile = "api.xml";
+                //var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+                //options.IncludeXmlComments(xmlPath);
 
-                //options.AddSecurityDefinition("oauth2", new OpenApiSecurityScheme
-                //{
-                //    Name = "Bearer",
-                //    Type = SecuritySchemeType.OAuth2,
-                //    Scheme = "oauth2",
-                //    BearerFormat = "JWT",
-                //    In = ParameterLocation.Header,
-                //    Flows = new OpenApiOAuthFlows
-                //    {
-                //        Password = new OpenApiOAuthFlow
-                //        {
-                //            TokenUrl = new Uri($"{identitySettings.Url}/connect/token"),
-                //            Scopes = new Dictionary<string, string>
-                //        {
+                options.AddSecurityDefinition("oauth2", new OpenApiSecurityScheme
+                {
+                    Name = "Bearer",
+                    Type = SecuritySchemeType.OAuth2,
+                    Scheme = "oauth2",
+                    BearerFormat = "JWT",
+                    In = ParameterLocation.Header,
+                    Flows = new OpenApiOAuthFlows
+                    {
+                        Password = new OpenApiOAuthFlow
+                        {
+                            TokenUrl = new Uri($"{identitySettings.Url}/connect/token"),
+                            Scopes = new Dictionary<string, string>
+                            {
+                                {AppScopes.ExhibitionsView, "ExhibitionsView"},
+                            {AppScopes.ExhibitionsCreate , "ExhibitionsCreate"}
+                            }
+                        }
+                    }
+                });
 
-                //        }
-                //        }
-                //    }
-                //});
-
-                //options.AddSecurityRequirement(new OpenApiSecurityRequirement
-                //{
-                //    {
-                //        new OpenApiSecurityScheme
-                //        {
-                //            Reference = new OpenApiReference
-                //            {
-                //                Type = ReferenceType.SecurityScheme,
-                //                Id = "oauth2"
-                //            }
-                //        },
-                //        new List<string>()
-                //    }
-                //});
+                options.AddSecurityRequirement(new OpenApiSecurityRequirement
+                {
+                    {
+                        new OpenApiSecurityScheme
+                        {
+                            Reference = new OpenApiReference
+                            {
+                                Type = ReferenceType.SecurityScheme,
+                                Id = "oauth2"
+                            }
+                        },
+                        new List<string>()
+                    }
+                });
 
                 options.UseOneOfForPolymorphism();
-                //options.EnableAnnotations(enableAnnotationsForInheritance: true, enableAnnotationsForPolymorphism: true);
+                options.EnableAnnotations(enableAnnotationsForInheritance: true, enableAnnotationsForPolymorphism: true);
 
-                //options.ExampleFilters();
+                options.ExampleFilters();
             });
 
-            //services.AddSwaggerExamplesFromAssemblies(Assembly.GetEntryAssembly());
+            services.AddSwaggerExamplesFromAssemblies(Assembly.GetEntryAssembly());
 
             services.AddSwaggerGenNewtonsoftSupport();
 

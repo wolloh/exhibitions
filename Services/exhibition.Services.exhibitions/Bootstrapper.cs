@@ -9,7 +9,7 @@ namespace exhibition.Services.exhibitions
 {
     public static class Bootstrapper
     {
-        public static IServiceCollection AddBookService(this IServiceCollection services)
+        public static IServiceCollection AddExhibitionsService(this IServiceCollection services)
         {
             services.AddSingleton<IExhibitionService, ExhibitionService>();
 
