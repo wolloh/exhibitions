@@ -88,15 +88,22 @@ namespace exhibitions.Context.Setup
                 Name = "Монопородная выставка \" АМЕРИКАНСКАЯ АКИТА\"",
                 Place= "Тульская область, город Чехов, наб. Балканская, 01",
                 Categories=new List<Entities.Category>() {c1 },
+                Date= DateTime.Now,
             };
             context.Exhibitions.Add(e1);
+
+            var guid = Guid.NewGuid();
+            var bytes = guid.ToByteArray();
+            var rawValue = BitConverter.ToInt64(bytes, 0);
+            var inRangeValue = Math.Abs(rawValue) % DateTime.MaxValue.Ticks;
 
             var e2 = new Entities.Exhibition()
             {
                 Name = "МОНОПОРОДНАЯ ВЫСТАВКА \" СРЕДНЕАЗИАТСКАЯ ОВЧАРКА\" РАНГ КЧК",
                 Place = "Курганская область, город Серпухов, шоссе Косиора, 43",
                 Categories = new List<Entities.Category>() { c1 },
-            };
+                Date= new DateTime(inRangeValue),
+        };
             context.Exhibitions.Add(e2);
 
 

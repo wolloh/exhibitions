@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using exhibition.Api.Controllers.Models;
-using exhibition.Common.Response;
+using exhibition.Common.Responses;
 using exhibition.Services.exhibitions;
 using exhibition.Services.exhibitions.Models;
 using Microsoft.AspNetCore.Mvc;

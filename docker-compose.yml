@@ -1,8 +1,21 @@
 version: '3.4'
 
 services:
-  exhibition.api:
-    image: ${DOCKER_REGISTRY-}exhibitionapi
+  exhibitions_api:
+    image: ${DOCKER_REGISTRY-}exhibitionsapi
     build:
       context: .
-      dockerfile: System/Api/exhibition.Api/Dockerfile
+      dockerfile: System/Api/exhibitions.Api/Dockerfile
+    depends_on:
+     - exhibitions_postgresql
+    
+  exhibitions_postgresql:
+    image: postgres:14.1
+
+  exhibitions_identity:
+    image: ${DOCKER_REGISTRY-}exhibitionsidentity
+    build:
+      context: .
+      dockerfile: System/Identity/exhibitions.Identity/Dockerfile
+    depends_on:
+     - exhibitions_api
