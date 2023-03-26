@@ -49,6 +49,8 @@ app.UseAuthorization();
 app.MapControllers();
 app.UseAppMiddlewares();
 app.UseAppCors();
+AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
+AppContext.SetSwitch("Npgsql.DisableDateTimeInfinityConversions", true);
 DbInitializer.Execute(app.Services);
 DbSeeder.Execute(app.Services, true, true);
 

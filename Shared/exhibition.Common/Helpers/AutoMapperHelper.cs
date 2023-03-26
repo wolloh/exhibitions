@@ -7,7 +7,7 @@ namespace exhibition.Common.Helpers
         public static void Register(IServiceCollection services)
         {
             var assemblies = AppDomain.CurrentDomain.GetAssemblies()
-                .Where(s => s.FullName != null && (s.FullName.ToLower().StartsWith("testsolution.") ||  s.FullName.ToLower().StartsWith("mainapi")));
+                .Where(s => s.FullName != null && (s.FullName.ToLower().StartsWith("exhibition.") ||  s.FullName.ToLower().StartsWith("exhibitions.Api")));
 
             services.AddAutoMapper(assemblies);
         }
